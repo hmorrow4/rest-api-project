@@ -38,6 +38,17 @@ app.get("/api/resources/:id", (req, res) => {
   res.json(resource);
 });
 
+app.post("/api/resources", (req, res) => {
+  const newResource = {
+    id: resources.length + 1,
+    name: req.body.name
+  };
+
+  resources.push(newResource);
+
+  res.status(201).json(newResource);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
