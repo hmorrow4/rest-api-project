@@ -38,6 +38,22 @@ app.get("/api/resources/:id", (req, res) => {
   res.json(resource);
 });
 
+app.delete("/api/resources/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const index = resources.findIndex((item) => item.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({
+      message: "Resource not found"
+    });
+  }
+
+  const deletedResource = resources.splice(index, 1);
+
+  res.json(deletedResource[0]);
+});
+
 app.put("/api/resources/:id", (req, res) => {
   const id = parseInt(req.params.id);
 
