@@ -38,6 +38,22 @@ app.get("/api/resources/:id", (req, res) => {
   res.json(resource);
 });
 
+app.put("/api/resources/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const resource = resources.find((item) => item.id === id);
+
+  if (!resource) {
+    return res.status(404).json({
+      message: "Resource not found"
+    });
+  }
+
+  resource.name = req.body.name;
+
+  res.json(resource);
+});
+
 app.post("/api/resources", (req, res) => {
   const newResource = {
     id: resources.length + 1,
